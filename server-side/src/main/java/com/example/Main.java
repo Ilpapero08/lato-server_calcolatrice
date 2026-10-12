@@ -13,20 +13,20 @@ public class Main {
         ServerSocket serverSocket = new ServerSocket(3000);
         Socket socket = serverSocket.accept();
 
-        System.out.println("Qualcuno si e' colleagato!!!");
+        System.out.println("Client collegato" + "\n");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-        
-        
+        Boolean running = true;
 
-        while (true){
+        while (running){
             Double risultato = 0.0;
 
+            String operatore = in.readLine();
             Double numero1 = Double.parseDouble(in.readLine());
             Double numero2 = Double.parseDouble(in.readLine());
-            String operatore = in.readLine();
+            
 
             if(numero1==0 && numero2==0){
                 break;
@@ -46,7 +46,16 @@ public class Main {
                     break;
 
                 case "/":
-                    risultato = numero1 / numero2;
+                    if(numero2==0){
+                        out.println("Error cod: Division_By_Zero");
+                    } else{
+                        risultato = numero1 / numero2;
+                    }
+                    break;
+
+                case "exit":
+                    out.println("exit");
+                    running = false;
                     break;
             
                 default:
@@ -55,6 +64,6 @@ public class Main {
 
             out.println(risultato);
         }
-        out.println("Disconnesso ");
+        System.out.println("Client disconnesso");
     }
 }
