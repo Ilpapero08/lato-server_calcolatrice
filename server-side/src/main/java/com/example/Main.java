@@ -18,17 +18,16 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-        Scanner scanner = new Scanner(System.in);
         
-        String operatore = "";
-        Double numero1 = Double.parseDouble(in.readLine());
-        Double numero2 = Double.parseDouble(in.readLine());
-
-        Double risultato = 0.0;
+        
 
         while (true){
-            operatore = scanner.nextLine();
-            
+            Double risultato = 0.0;
+
+            Double numero1 = Double.parseDouble(in.readLine());
+            Double numero2 = Double.parseDouble(in.readLine());
+            String operatore = in.readLine();
+
             if(numero1==0 && numero2==0){
                 break;
             }
@@ -53,8 +52,9 @@ public class Main {
                 default:
                     break;
             }
+
             out.println(risultato);
         }
-
+        out.println("Disconnesso ");
     }
 }
