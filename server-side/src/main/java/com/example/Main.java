@@ -20,13 +20,32 @@ public class Main {
 
         Boolean running = true;
 
+        String operatore = "";
+        Double numero1 = 0.0;
+        Double numero2 = 0.0;
+        boolean datiValidi = false;
+
         while (running){
             Double risultato = 0.0;
+            do {
+                try {
+                    operatore = in.readLine();
+                    
+                    numero1 = Double.parseDouble(in.readLine());
+                    numero2 = Double.parseDouble(in.readLine());
+                    
+                    if (operatore.equals("+") || operatore.equals("-") || operatore.equals("*") || operatore.equals("/")) {
+                        datiValidi = true; 
+                    } else {
+                        out.println("Operatore non valido. Riprova.");
+                    }
+                    
+                } catch (NumberFormatException e) {
+                    out.println("Errore: Il client ha inserito lettere al posto di numeri. Riprova.");
+                    datiValidi = false; 
+                }
 
-            String operatore = in.readLine();
-            Double numero1 = Double.parseDouble(in.readLine());
-            Double numero2 = Double.parseDouble(in.readLine());
-            
+            } while (!datiValidi);
 
             if(numero1==0 && numero2==0){
                 break;
